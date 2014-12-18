@@ -16,3 +16,12 @@ Board looks something like this:
 | I1 | I2 | I3 | I4 | I5 | I6 | I7 | I8 | I9 | I10 |
 | J1 | J2 | J3 | J4 | J5 | J6 | J7 | J8 | J9 | J10 |
 ```
+
+# To use:
+
+```
+git clone git@github.com:deniseyu/battleships-again.git
+cd battleships-again
+```
+
+To test, run 'spec' from the command line.

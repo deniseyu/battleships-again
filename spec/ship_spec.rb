@@ -14,6 +14,15 @@ describe Ship do
       expect(ship).to be_floating
     end
 
+    it 'should know that it is initially not on the board' do
+      expect(ship).not_to be_placed
+    end
+
+    it 'should know after it has been placed' do
+      ship.place!
+      expect(ship).to be_placed
+    end
+
   end
 
   context 'a ship initialized with size 3' do

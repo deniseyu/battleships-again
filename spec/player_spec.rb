@@ -8,6 +8,10 @@ describe 'Player' do
     expect(player.own_board.class).to eq Grid
   end
 
+  it 'has 0 points' do
+    expect(player.points).to eq 0
+  end
+
   it 'has a firing board' do
     expect(player.firing_board.class).to eq Grid
   end
@@ -15,6 +19,25 @@ describe 'Player' do
   it 'has five ships' do
     player.get_ships!
     expect(player.ships.length).to eq 5
+  end
+
+  it 'knows that five ships are initially floating' do
+    player.get_ships!
+    expect(player.number_of_ships_floating).to eq 5
+  end
+
+  it 'should know that four ships are floating when one sinks' do
+    player.get_ships!
+    patrolboat = player.ships[1]
+    2.times { patrolboat.get_hit }
+    expect(patrolboat).not_to be_floating
+    expect(player.number_of_ships_floating).to eq 4
+  end
+
+  it 'should know when all ships are sunk' do
+    player.get_ships!
+    player.ships.each { |ship| ship.hit_points = 0 }
+    expect(player.all_ships_sunk?).to eq true
   end
 
   context 'checking out my fleet' do
@@ -46,7 +69,6 @@ describe 'Player' do
   context 'placing ships on own board' do
     before(:each) do
       player.get_ships!
-      player.own_board.populateGrid
     end
 
     it 'can place a ship in a cell' do
@@ -67,7 +89,24 @@ describe 'Player' do
       expect{ (player.place(battleship, "A10")) }.to raise_error('No ship can go here!')
     end
 
-    context 'when placing a ship vertically' do
+    it 'should know when all of her ships have been placed' do
+      player.place_horizontal(player.ships[0], "A1")
+      player.place_horizontal(player.ships[1], "C1")
+      player.place_horizontal(player.ships[2], "E1")
+      player.place_horizontal(player.ships[3], "F1")
+      player.place_horizontal(player.ships[4], "G1")
+      expect(player.all_ships_placed?).to eq true
+    end
+
+    it 'should not think all of her ships are placed when they are not' do
+      player.place_horizontal(player.ships[0], "A1")
+      player.place_horizontal(player.ships[1], "C1")
+      player.place_horizontal(player.ships[2], "E1")
+      player.place_horizontal(player.ships[3], "F1")
+      expect(player.all_ships_placed?).to eq false
+    end
+
+    context 'vertically' do
       it 'can vertically place a Patrolboat over two vertically adjacent cells' do
         patrolboat = player.ships[1]
         player.place_vertical(patrolboat, "A1")
@@ -92,7 +131,7 @@ describe 'Player' do
       end
     end
 
-    context 'when placing a ship horizontally' do
+    context 'horizontally' do
       it 'can place a patrolboat in two horizontally adjacent cells' do
         patrolboat = player.ships[1]
         player.place_horizontal(patrolboat, "D3")
@@ -106,14 +145,21 @@ describe 'Player' do
         expect(player.own_board.fetch("E7").content).not_to eq patrolboat
         expect(player.own_board.fetch("G5").content).not_to eq patrolboat
       end
+
+      it 'can vertically place a battleship over a number of adjacent cells equal to the size of the ship' do
+        battleship = player.ships[0]
+        player.place_horizontal(battleship, "H1")
+        expect(player.own_board.fetch("H1").content).to eq battleship
+        expect(player.own_board.fetch("H2").content).to eq battleship
+        expect(player.own_board.fetch("H3").content).to eq battleship
+        expect(player.own_board.fetch("H4").content).to eq battleship
+      end
     end
   end
 
   context 'firing shots' do
 
-    before(:each) do
-      player.firing_board.populateGrid
-    end
+    let(:opponent) { Player.new }
 
     it 'a coordinate should initially not be fired at' do
       expect(player.firing_board.fetch("A5")).not_to be_fired_at
@@ -124,6 +170,10 @@ describe 'Player' do
       expect(player.firing_board.fetch("A5")).to be_fired_at
     end
 
+    it 'should not be able to fire at the same coordinate twice' do
+      player.shoot_at("D7")
+      expect{ player.shoot_at("D7") }.to raise_error('You cannot shoot here!')
+    end
   end
 
 end

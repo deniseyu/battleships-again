@@ -7,10 +7,19 @@ class Ship
     @size = size
     @floating = true
     @hit_points = size
+    @placed = false
   end
 
   def floating?
     @floating = true unless @hit_points == 0
+  end
+
+  def place!
+    @placed = true
+  end
+
+  def placed?
+    @placed
   end
 
   def get_hit
