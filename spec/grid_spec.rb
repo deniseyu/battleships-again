@@ -1,4 +1,4 @@
-require 'grid'
+require './app/models/grid'
 
 describe Grid do
 

@@ -19,9 +19,16 @@ Board looks something like this:
 
 # To use:
 
+Clone the repository:
 ```
 git clone git@github.com:deniseyu/battleships-again.git
 cd battleships-again
+```
+
+Install dependencies and start the server:
+```
+bundle install
+shotgun
 ```
 
 To test, run 'spec' from the command line.

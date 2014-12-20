@@ -1,4 +1,4 @@
-require 'player'
+require './app/models/player'
 
 describe 'Player' do
 

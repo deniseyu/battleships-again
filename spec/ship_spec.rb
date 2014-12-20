@@ -1,4 +1,4 @@
-require 'ship'
+require './app/models/ship'
 
 describe Ship do
 

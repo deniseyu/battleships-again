@@ -32,8 +32,7 @@ class Player
   end
 
   def place_vertical(ship, starting_coordinate)
-    cells_to_occupy = Array.new(ship.size)
-    cells_to_occupy.each do |cell|
+    Array.new(ship.size).each do |cell|
       self.place(ship, starting_coordinate)
       starting_coordinate = starting_coordinate.reverse.next.reverse
     end
@@ -41,8 +40,7 @@ class Player
   end
 
   def place_horizontal(ship, starting_coordinate)
-    cells_to_occupy = Array.new(ship.size)
-    cells_to_occupy.each do |cell|
+    Array.new(ship.size).each do |cell|
       self.place(ship, starting_coordinate)
       starting_coordinate = starting_coordinate.next
     end

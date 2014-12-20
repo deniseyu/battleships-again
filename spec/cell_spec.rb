@@ -1,4 +1,6 @@
-describe 'cell' do
+require './app/models/cell'
+
+describe 'Cell' do
 
   let(:cell) { Cell.new }
   let(:ship) { double :ship }
