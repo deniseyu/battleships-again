@@ -1,0 +1,47 @@
+<h1><%= @player.name %>'s Command Center</h1>
+
+<% unless @player.all_ships_placed? %>
+  <h2>Before you can start, you must place your ships!</h2>
+  <h2>Ships not yet placed:</h2>
+  <% @ships_in_hand.each do |ship| %>
+    <li><%= ship.name %></li>
+  <% end %>
+  <h2>Ships on board:</h2>
+  <% @ships_on_board.each do |ship| %>
+    <li><%= ship.name %></li>
+  <% end %>
+
+  <a href='/place_ships'>Place ships!</a>
+<% end %>
+
+<h2>Your Firing Board</h2>
+<p>These correspond to squares on your opponent's board. A darkened square indicates that a coordinate has already been fired at.</p>
+
+<section id='both-boards'>
+  <article id='firing-board-container'>
+  <h2>Firing Board</h2>
+    <section id='firing-board' class='grid-container'>
+      <% @player.firing_board.coordinates.keys.each do |cell| %>
+      <article class='cell'>
+        <%= cell %>
+      </article>
+      <% end %>
+    </section>
+  </article>
+  <article id='own-board-container'>
+    <h2>My Board</h2>
+    <section id='own-board' class='grid-container'>
+      <% @player.own_board.coordinates.keys.each do |cell| %>
+      <% if @player.own_board.coordinates[cell].content == 'water' %>
+        <article class='water'>
+          <%= cell %>
+        </article>
+        <% else %>
+        <article class='cell'>
+          <%= cell %>
+        </article>
+        <% end %>
+      <% end %>
+    </section>
+  </article>
+</section>

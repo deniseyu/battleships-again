@@ -3,9 +3,10 @@ require_relative 'ship'
 
 class Player
 
-  attr_accessor :own_board, :firing_board, :ships, :points
+  attr_accessor :own_board, :firing_board, :ships, :points, :name
 
-  def initialize
+  def initialize(name = nil)
+    @name = name
     @own_board, @firing_board = Grid.new, Grid.new
     @own_board.populateGrid
     @firing_board.populateGrid

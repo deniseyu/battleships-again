@@ -1,1 +1,15 @@
+<% unless @player %>
 What is your name?
+
+<form action='/register' method='POST'>
+  <input type='text' name='name'>
+  <input type='submit' value='Submit'>
+</form>
+
+<% else %>
+
+Welcome, <%= @player.name %>!
+
+<a href='/home'>Click here to begin!</a>
+
+<% end %>
