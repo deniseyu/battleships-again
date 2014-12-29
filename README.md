@@ -23,6 +23,8 @@ Board looks something like this:
 
 Currently, one player can place ships on the board and view those ships from the command center.
 
+[You can poke around on Heroku!](https://warboats.herokuapp.com)
+
 Next steps:
 * Catch errors in Sinatra controller when placing ships improperly
 * Get multiplayer mode working with sessions
