@@ -75,7 +75,7 @@ This game was designed with the SOLID principles of Object-Oriented Design in mi
       Battleship
       <br>Patrol Boat
       <br>Destroyer
-      <br>Aircraft Carrier
+      <br>Dreadnought
       <br>Submarine
     </td>
   </tr>

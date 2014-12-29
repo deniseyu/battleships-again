@@ -61,9 +61,9 @@ describe Ship do
       expect(patrolboat.size).to eq 2
     end
 
-    it 'can be an aircraft carrier' do
-      aircraftcarrier = AircraftCarrier.new
-      expect(aircraftcarrier.size).to eq 5
+    it 'can be an dreadnought' do
+      dreadnought = Dreadnought.new
+      expect(dreadnought.size).to eq 5
     end
 
     it 'can be a destroyer' do

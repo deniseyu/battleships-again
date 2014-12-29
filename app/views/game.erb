@@ -1,7 +1,7 @@
 <h1><%= @player.name %>'s Command Center</h1>
 
-<% unless @player.all_ships_placed? %>
-  <section id='starting-steps'>
+<section id='starting-steps'>
+  <% unless @player.all_ships_placed? %>
     <h1>Before you can start, you must place your ships!</h1>
     <h2>Ships not yet placed:</h2>
 
@@ -14,8 +14,11 @@
     <% end %>
 
     >> <a href='/place_ships'>Place ships!</a> <<
-  </section>
-<% end %>
+
+  <% else %>
+    <h2>All ships placed, ready to begin!</h2>
+  <% end %>
+</section>
 
   <section id='board-notes'>
     <p>Your board: Squares that contain ships are pink. Squares that are empty (in other words, contain water) are blue.</p>

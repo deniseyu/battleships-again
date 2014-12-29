@@ -60,7 +60,6 @@ class Battleships < Sinatra::Base
     else
       @player.place_horizontal(@ship, params[:coordinate])
     end
-    # flash[:notice] = 'You cannot place a ship there!'
     flash[:notice] = "#{@ship.name} successfully placed!"
     redirect '/home'
   end

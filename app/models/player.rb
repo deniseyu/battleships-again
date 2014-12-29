@@ -15,7 +15,7 @@ class Player
   end
 
   def get_ships!
-    default_fleet = [Battleship.new, Patrolboat.new, AircraftCarrier.new, Destroyer.new, Submarine.new]
+    default_fleet = [Battleship.new, Patrolboat.new, Dreadnought.new, Destroyer.new, Submarine.new]
     @ships.concat(default_fleet)
   end
 

@@ -41,9 +41,9 @@ class Patrolboat < Ship
   end
 end
 
-class AircraftCarrier < Ship
+class Dreadnought < Ship
   def initialize
-    super 5, 'Aircraft Carrier'
+    super 5, 'Dreadnought'
   end
 end
 

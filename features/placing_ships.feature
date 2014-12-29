@@ -11,3 +11,11 @@ Feature: Placing ships on the board
     Then I should see the message, "Ship successfully placed!"
     And see a corresponding number of cells on my board reflecting a ship
 
+  Scenario: All ships are placed
+    Given I am on the place ships page
+    When I place my Battleship
+    And I place my Patrolboat
+    And I place my Destroyer
+    And I place my Submarine
+    And lastly I place my Dreadnought
+    Then I should see a link to begin the game
