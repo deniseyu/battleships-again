@@ -1,12 +1,4 @@
 <h2>Ships not yet placed:</h2>
 <% @ships_in_hand.each do |ship| %>
-  <li><%= ship.name %></li>
+  <li><a href='/place_ships/<%= ship.name %>'><%= ship.name %></a></li>
 <% end %>
-
-Type the name of the ship exactly as it is above...
-<form action='/place_ships' method='post'>
-  <p>Which ship? <input type='text' name='ship'></p>
-  <p>What orientation? (horizontal or vertical) <input type='text' name='orientation'></p>
-  <p>What starting coordinate? <input type='text' name='starting_coordinate'></p>
-  <p><input type='submit' value='Place!'></p>
-</form>

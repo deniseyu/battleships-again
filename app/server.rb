@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'rack-flash'
 require_relative 'models/cell'
 require_relative 'models/game'
 require_relative 'models/grid'
@@ -9,7 +10,9 @@ class Battleships < Sinatra::Base
   set :views, Proc.new{File.join(root, '..', "app", "views")}
   set :public_dir, Proc.new{File.join(root, '..', "public")}
   set :public_folder, 'public'
+  set :raise_errors, false
   use Rack::Session::Pool
+  use Rack::Flash
 
   GAME = Game.new
 
@@ -43,14 +46,27 @@ class Battleships < Sinatra::Base
     erb :place_ships
   end
 
+  get '/place_ships/:shipname' do
+    @player = session[:player]
+    @ship = @player.ships.find{|ship| ship.name == params[:shipname]}
+    erb :place_ship
+  end
+
   post '/place_ships' do
     @player = session[:player]
+    @ship = @player.ships.find{|ship| ship.name == params[:ship]}
     if params[:orientation] == 'vertical'
-      @player.place_vertical(params[:ship], params[:starting_coordinate])
+      @player.place_vertical(@ship, params[:coordinate])
     else
-      @player.place_horizontal(params[:ship], params[:starting_coordinate])
+      @player.place_horizontal(@ship, params[:coordinate])
     end
-    redirect '/game'
+    # flash[:notice] = 'You cannot place a ship there!'
+    flash[:notice] = "#{@ship.name} successfully placed!"
+    redirect '/home'
+  end
+
+  error do
+    redirect '/home'
   end
 
   # start the server if ruby file executed directly

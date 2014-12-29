@@ -1,0 +1,11 @@
+You are placing your <%= @ship.name %>!
+
+<form action='/place_ships' method='POST'>
+  <input type='hidden' name='ship' value='<%= @ship.name %>'>
+  <h3>Choose orientation:</h3>
+  <p><input type='radio' name='orientation' value='vertical' id='vertical'>Vertical</p>
+  <p><input type='radio' name='orientation' value='horizontal' id='horizontal'>Horizontal</p>
+  <h3>Choose your starting coordinate:</h3>
+  <p><input type='string' name='coordinate' placeholder='Ex. "A4"'></p>
+  <p><input type='submit' value='Go!'></p>
+</form>

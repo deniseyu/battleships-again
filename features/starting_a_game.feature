@@ -12,3 +12,4 @@ Feature: Starting a game of Battleships
     Given I am registered
     When I am at my command center
     Then I should see two boards - the firing board and my board
+    And I should see a link to place my ships on the board
