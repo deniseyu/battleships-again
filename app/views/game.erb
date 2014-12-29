@@ -1,21 +1,26 @@
 <h1><%= @player.name %>'s Command Center</h1>
 
 <% unless @player.all_ships_placed? %>
-  <h2>Before you can start, you must place your ships!</h2>
-  <h2>Ships not yet placed:</h2>
-  <% @ships_in_hand.each do |ship| %>
-    <li><%= ship.name %></li>
-  <% end %>
-  <h2>Ships on board:</h2>
-  <% @ships_on_board.each do |ship| %>
-    <li><%= ship.name %></li>
-  <% end %>
+  <section id='starting-steps'>
+    <h1>Before you can start, you must place your ships!</h1>
+    <h2>Ships not yet placed:</h2>
 
-  <a href='/place_ships'>Place ships!</a>
+    <% @ships_in_hand.each do |ship| %>
+      <li><%= ship.name %></li>
+    <% end %>
+    <h2>Ships on board:</h2>
+    <% @ships_on_board.each do |ship| %>
+      <li><%= ship.name %></li>
+    <% end %>
+
+    >> <a href='/place_ships'>Place ships!</a> <<
+  </section>
 <% end %>
 
-<h2>Your Firing Board</h2>
-<p>These correspond to squares on your opponent's board. A darkened square indicates that a coordinate has already been fired at.</p>
+  <section id='board-notes'>
+    <p>Your board: Squares that contain ships are pink. Squares that are empty (in other words, contain water) are blue.</p>
+    <p>Your firing board: These correspond to squares on your opponent's board. A darkened square indicates that a coordinate has already been fired at.</p>
+  </section>
 
 <section id='both-boards'>
   <article id='firing-board-container'>

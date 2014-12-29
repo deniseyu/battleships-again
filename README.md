@@ -2,6 +2,8 @@
 
 This is my second attempt at building a playable, fully-tested back end for Ruby Battleships.
 
+This project is still in progress. If you want to help me, please feel free to send pull requests!
+
 Board looks something like this:
 
 ```
@@ -16,6 +18,18 @@ Board looks something like this:
 | I1 | I2 | I3 | I4 | I5 | I6 | I7 | I8 | I9 | I10 |
 | J1 | J2 | J3 | J4 | J5 | J6 | J7 | J8 | J9 | J10 |
 ```
+
+# Current Progress
+
+Currently, one player can place ships on the board and view those ships from the command center.
+
+Next steps:
+* Catch errors in Sinatra controller when placing ships improperly
+* Get multiplayer mode working with sessions
+
+# Preview
+
+![Battleships](https://raw.github.com/deniseyu/battleships-again/master/public/place-ships-screenshot.png)
 
 # To use:
 
