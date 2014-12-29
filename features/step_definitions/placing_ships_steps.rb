@@ -29,6 +29,27 @@ Then(/^see a corresponding number of cells on my board reflecting a ship$/) do
   expect(page).to have_selector '#own-board-container .cell', :count => 4
 end
 
+When(/^I enter a starting coordinate$/) do
+  fill_in 'coordinate', :with => 'A3'
+end
+
+When(/^I forget to choose an orientation$/) do
+  click_button 'Go!'
+end
+
+Then(/^I should see the message 'All fields need to be filled out!'$/) do
+  expect(page).to have_content 'All fields need to be filled out!'
+end
+
+When(/^I enter an orientation$/) do
+  choose 'vertical'
+end
+
+When(/^I forget to choose a coordinate$/) do
+  click_button 'Go!'
+end
+
+
 When(/^I place my Battleship$/) do
   click_link 'Battleship'
   choose 'vertical'
@@ -64,7 +85,7 @@ When(/^lastly I place my Dreadnought$/) do
   visit '/place_ships'
   click_link 'Dreadnought'
   choose 'horizontal'
-  fill_in 'coordinate', :with => 'E4'
+  fill_in 'coordinate', :with => 'H4'
   click_button 'Go!'
 end
 

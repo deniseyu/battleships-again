@@ -11,6 +11,21 @@ Feature: Placing ships on the board
     Then I should see the message, "Ship successfully placed!"
     And see a corresponding number of cells on my board reflecting a ship
 
+  Scenario: Placing a ship without specifying orientation
+    Given I am on the place ships page
+    When I click 'Battleship'
+    And I enter a starting coordinate
+    But I forget to choose an orientation
+    Then I should see the message 'All fields need to be filled out!'
+
+  @ignore
+  Scenario: Placing a ship without specifying coordinate
+    Given I am on the place ships page
+    When I click 'Battleship'
+    And I enter an orientation
+    But I forget to choose a coordinate
+    Then I should see the message 'All fields need to be filled out!'
+
   Scenario: All ships are placed
     Given I am on the place ships page
     When I place my Battleship
