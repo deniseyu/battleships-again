@@ -5,11 +5,11 @@
     <h1>Before you can start, you must place your ships!</h1>
     <h2>Ships not yet placed:</h2>
 
-    <% @ships_in_hand.each do |ship| %>
+    <% @player.ships_in_hand.each do |ship| %>
       <li><%= ship.name %></li>
     <% end %>
     <h2>Ships on board:</h2>
-    <% @ships_on_board.each do |ship| %>
+    <% @player.ships_on_board.each do |ship| %>
       <li><%= ship.name %></li>
     <% end %>
 

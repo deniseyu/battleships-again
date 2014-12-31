@@ -1,4 +1,4 @@
 <h2>Ships not yet placed:</h2>
-<% @ships_in_hand.each do |ship| %>
+<% @player.ships_in_hand.each do |ship| %>
   <li><a href='/place_ships/<%= ship.name %>'><%= ship.name %></a></li>
 <% end %>

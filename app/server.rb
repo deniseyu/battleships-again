@@ -17,6 +17,8 @@ class Battleships < Sinatra::Base
   GAME = Game.new
 
   get '/' do
+    GAME.add_players
+    @player_two = GAME.player_two
     erb :index
   end
 
@@ -25,7 +27,6 @@ class Battleships < Sinatra::Base
   end
 
   post '/register' do
-    GAME.add_players
     session[:player] = GAME.player_one
     GAME.player_one.name = params[:name]
     @player = session[:player]
@@ -35,40 +36,30 @@ class Battleships < Sinatra::Base
 
   get '/home' do
     @player = session[:player]
-    @ships_in_hand = @player.ships.select {|ship| ship.placed? == false }
-    @ships_on_board = @player.ships.select {|ship| ship.placed? == true }
     erb :game
   end
 
   get '/place_ships' do
     @player = session[:player]
-    @ships_in_hand = @player.ships.select {|ship| ship.placed? == false }
     erb :place_ships
   end
 
   get '/place_ships/:shipname' do
     @player = session[:player]
-    @ship = @player.ships.find{|ship| ship.name == params[:shipname]}
+    @ship = @player.find_ship(params[:shipname])
     erb :place_ship
   end
 
   post '/place_ships' do
     @player = session[:player]
-    @ship = @player.ships.find{|ship| ship.name == params[:ship]}
-    if params[:orientation] == 'horizontal' && @player.own_board.coordinates.has_key?(params[:coordinate])
-      @player.place_horizontal(@ship, params[:coordinate])
-    elsif params[:orientation] == 'vertical' && @player.own_board.coordinates.has_key?(params[:coordinate])
-      @player.place_vertical(@ship, params[:coordinate])
+    @ship = @player.find_ship(params[:ship])
+    if @player.place_ship(@ship, params[:orientation], params[:coordinate])
+      flash[:notice] = "#{@ship.name} successfully placed!"
+      redirect '/home'
     else
       flash[:notice] = 'All fields need to be filled out!'
       redirect back
     end
-    flash[:notice] = "#{@ship.name} successfully placed!"
-    redirect '/home'
-  end
-
-  error do
-    redirect '/home'
   end
 
   # start the server if ruby file executed directly

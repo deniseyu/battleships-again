@@ -71,4 +71,28 @@ class Player
     opponent.own_board.fetch(coordinate).hit! unless opponent == nil
   end
 
+  def place_ship(ship, orientation, starting_coordinate)
+    return false unless orientation
+    return false unless starting_coordinate
+    return false unless own_board.coordinates.has_key?(starting_coordinate)
+    if orientation == 'horizontal'
+      place_horizontal(ship, starting_coordinate)
+    elsif orientation == 'vertical'
+      place_vertical(ship, starting_coordinate)
+    end
+    true
+  end
+
+  def ships_in_hand
+    ships.select {|ship| ship.placed? == false }
+  end
+
+  def ships_on_board
+    ships.select {|ship| ship.placed? == true }
+  end
+
+  def find_ship(a_ship)
+    ships.find{|ship| ship.name == a_ship}
+  end
+
 end

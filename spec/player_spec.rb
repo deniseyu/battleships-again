@@ -49,19 +49,19 @@ describe 'Player' do
       expect(player.ships).to include Battleship
     end
 
-    it 'has a battleship' do
+    it 'has a patrol boat' do
       expect(player.ships).to include Patrolboat
     end
 
-    it 'has a battleship' do
+    it 'has a dreadnought' do
       expect(player.ships).to include Dreadnought
     end
 
-    it 'has a battleship' do
+    it 'has a destroyer' do
       expect(player.ships).to include Destroyer
     end
 
-    it 'has a battleship' do
+    it 'has a submarine' do
       expect(player.ships).to include Submarine
     end
   end
