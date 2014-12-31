@@ -54,7 +54,7 @@ describe 'Player' do
     end
 
     it 'has a battleship' do
-      expect(player.ships).to include AircraftCarrier
+      expect(player.ships).to include Dreadnought
     end
 
     it 'has a battleship' do
