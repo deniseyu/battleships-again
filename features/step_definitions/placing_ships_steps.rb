@@ -49,6 +49,10 @@ When(/^I forget to choose a coordinate$/) do
   click_button 'Go!'
 end
 
+When(/^I enter an incorrect coordinate value$/) do
+  fill_in 'coordinate', :with => 'A15'
+  click_button 'Go!'
+end
 
 When(/^I place my Battleship$/) do
   click_link 'Battleship'

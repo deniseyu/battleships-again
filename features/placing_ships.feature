@@ -25,6 +25,13 @@ Feature: Placing ships on the board
     But I forget to choose a coordinate
     Then I should see the message 'All fields need to be filled out!'
 
+  Scenario: Placing a ship in an improper coordinate
+    Given I am on the place ships page
+    When I click 'Battleship'
+    And I enter an orientation
+    But I enter an incorrect coordinate value
+    Then I should see the message 'All fields need to be filled out!'
+
   Scenario: All ships are placed
     Given I am on the place ships page
     When I place my Battleship
