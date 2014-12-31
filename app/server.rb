@@ -55,9 +55,9 @@ class Battleships < Sinatra::Base
   post '/place_ships' do
     @player = session[:player]
     @ship = @player.ships.find{|ship| ship.name == params[:ship]}
-    if params[:orientation] == 'horizontal' && params[:coordinate] =~ /([A-J])(\d+)/
+    if params[:orientation] == 'horizontal' && @player.own_board.coordinates.has_key?(params[:coordinate])
       @player.place_horizontal(@ship, params[:coordinate])
-    elsif params[:orientation] == 'vertical' && params[:coordinate] =~ /([A-J])(\d+)/
+    elsif params[:orientation] == 'vertical' && @player.own_board.coordinates.has_key?(params[:coordinate])
       @player.place_vertical(@ship, params[:coordinate])
     else
       flash[:notice] = 'All fields need to be filled out!'

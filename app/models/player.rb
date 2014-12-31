@@ -32,6 +32,18 @@ class Player
     self.number_of_ships_floating == 0
   end
 
+  def ship_can_go_here?(ship, starting_coordinate, orientation)
+    Array.new(ship.size).each do |cell|
+      return false if @own_board.fetch(starting_coordinate).content != 'water'
+      if orientation == 'vertical'
+        starting_coordinate = starting_coordinate.reverse.next.reverse
+      elsif orientation == 'horizontal'
+        starting_coordinate = starting_coordinate.next
+      end
+      true
+    end
+  end
+
   def place_vertical(ship, starting_coordinate)
     Array.new(ship.size).each do |cell|
       self.place(ship, starting_coordinate)
