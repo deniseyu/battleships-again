@@ -18,7 +18,6 @@ Feature: Placing ships on the board
     But I forget to choose an orientation
     Then I should see the message 'All fields need to be filled out!'
 
-  @ignore
   Scenario: Placing a ship without specifying coordinate
     Given I am on the place ships page
     When I click 'Battleship'
